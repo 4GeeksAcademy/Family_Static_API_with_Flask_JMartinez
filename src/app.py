@@ -35,43 +35,25 @@ def handle_hello():
     # this is how you can use the Family datastructure by calling its methods
     members = jackson_family.get_all_members()
 
-    if members is None:
-        return jsonify(response_body), 400
-    else:
-
-        response_body = {
-            "hello": "world",
-            "family": members
-        }
-
-
-        return jsonify(response_body), 200
+    # if members is None:
+    #     return jsonify(response_body), 400
+    # else:
+    return jsonify(members), 200
 """-------------------------------------</Get_all>----------------------------------------- """
 
 
 """-------------------------------------<Get_one>----------------------------------------- """
 
-@app.route('/member/<int:member_id>', methods=['GET'])
-def obetener_miembro(member_id):
+@app.route('/member/<int:miembro_id>', methods=['GET'])
+def obetener_miembro(miembro_id):
 
     # this is how you can use the Family datastructure by calling its methods
-    members_one = jackson_family.get_member(member_id)
-   
-    if members_one:
-        if members_one is None:
-            return jsonify("miembro no valido"), 400
-        else:
-
-            response_body = {
-                "hello": "world",
-                "family": members_one
-            }
+    members_one = jackson_family.get_member(miembro_id)
+    # del members_one['id']
+    # print(members_one)
+    return jsonify(members_one), 200
 
 
-            return jsonify(response_body), 200
-    else :
-        
-        return jsonify("¡el miembro no existe!"), 400
               
 """-------------------------------------</Get_one>----------------------------------------- """
 
@@ -84,6 +66,15 @@ def add_miembro():
     try:
 
         new_member = json.loads(request.data)
+        moro = {
+             
+            "id": jackson_family._generateId(),
+            "first_name": new_member["first_name"],
+            "last_name":jackson_family.last_name,
+            "age": new_member["age"],
+            "lucky_numbers": new_member["lucky_numbers"]
+        
+        }
         jackson_family.add_member(new_member)
         return jsonify(new_member), 200
 
@@ -91,10 +82,26 @@ def add_miembro():
     except:
 
             return jsonify(), 200
+    
+
+"""-------------------------------------</POST_Member>----------------------------------------- """
+
+"""-------------------------------------</POST_Elminar>----------------------------------------- """
+
+
+@app.route('/member/<int:member_id>', methods=['DELETE'])
+def delete_member(member_id):
+    # elimina un miembro de la familia Jackson por su ID
+    member = jackson_family.delete_member(member_id)
+    # devuelve una respuesta JSON  con la clave "done": true.
+    return jsonify({"done": True}), 200
+
+
+
+
 
          
-              
-"""-------------------------------------</POST_Member>----------------------------------------- """
+"""-------------------------------------</POST_Elminar>----------------------------------------- """           
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':

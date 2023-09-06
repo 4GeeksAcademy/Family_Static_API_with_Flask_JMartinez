@@ -17,21 +17,21 @@ class FamilyStructure:
         # example list of members
         self._members = [{
             "id": self._generateId(),
-            "first_name": "John Jackson",
+            "first_name": "John",
             "last_name": last_name,
             "age": 33,
             "lucky_numbers": [7, 13, 22]
         },
         {
             "id": self._generateId(),
-            "first_name": "Jane Jackson",
+            "first_name": "Jane",
             "last_name": last_name,
             "age": 35,
             "lucky_numbers": [10, 14, 3]
         },
         {
             "id": self._generateId(),
-            "first_name": "Jimmy Jackson",
+            "first_name": "Jimmy",
             "last_name": last_name,
              "age": 5,
             "lucky_numbers": [1]
@@ -43,19 +43,21 @@ class FamilyStructure:
     def add_member(self, member):
         # fill this method and update the return
         self._members.append(member)
-        return None
+        
 
     def delete_member(self, id):
-        # fill this method and update the return
-        return self._members[id] 
+       # Busca y elimina un miembro con el ID 
+        for member in self._members:
+            if member["id"] == id:
+                self._members.remove(member)
+                return member  # Devuelve el  eliminado
 
     def get_member(self, id):
 
         for elemento in self._members:
             if elemento["id"] == id:
                 return elemento
-            else:
-                return False
+           
                 
             
 
