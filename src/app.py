@@ -66,15 +66,15 @@ def add_miembro():
     try:
 
         new_member = json.loads(request.data)
-        moro = {
+        # moro = {
              
-            "id": jackson_family._generateId(),
-            "first_name": new_member["first_name"],
-            "last_name":jackson_family.last_name,
-            "age": new_member["age"],
-            "lucky_numbers": new_member["lucky_numbers"]
+        #     "id": jackson_family._generateId(),
+        #     "first_name": new_member["first_name"],
+        #     "last_name":jackson_family.last_name,
+        #     "age": new_member["age"],
+        #     "lucky_numbers": new_member["lucky_numbers"]
         
-        }
+        # }
         jackson_family.add_member(new_member)
         return jsonify(new_member), 200
 
